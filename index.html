@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dev Shah | Strategic Change Leader & Accelerator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* 1. ARCHITECTURAL DESIGN SYSTEM & COLOR TOKENS */
+        :root {
+            --bg-pure-black: #000000;
+            --bg-deep-slate: #050B14;
+            --bg-card-dark: #0A1120;
+            --accent-cyan: #38bdf8; /* Exact LinkedIn Banner Accent */
+            --text-vibrant: #ffffff;
+            --text-silver: #E2E8F0; /* High Contrast Silver-Grey */
+            --text-muted: #94a3b8;
+            --border-subtle: #1e293b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-pure-black);
+            color: var(--text-silver);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Blueprint Grid Graphic Overlay */
+        .blueprint-bg {
+            position: relative;
+        }
+        .blueprint-bg::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* 2. TYPOGRAPHY & HEADERS */
+        h1, h2, h3, h4 {
+            font-family: 'Urbanist', sans-serif;
+            color: var(--text-vibrant);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: left;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title span {
+            color: var(--accent-cyan);
+        }
+
+        /* 3. NAVIGATION BAR */
+        header {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-subtle);
+            z-index: 1000;
+            padding: 1.25rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-vibrant);
+        }
+        .logo span { color: var(--accent-cyan); }
+
+        nav a {
+            color: var(--text-silver);
+            text-decoration: none;
+            margin-left: 2.5rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* 4. HERO CANVAS */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 4rem 4rem 4rem;
+            background: radial-gradient(circle at 80% 30%, rgba(56, 189, 248, 0.07) 0%, transparent 60%);
+        }
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 1;
+        }
+
+        .hero-pre {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--accent-cyan);
+            margin-bottom: 1rem;
+            display: block;
+            font-weight: 600;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-silver);
+            max-width: 750px;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        /* BUTTONS */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background-color: transparent;
+            color: var(--text-vibrant);
+            border: 2px solid var(--accent-cyan);
+            padding: 0.85rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.1);
+        }
+        .btn:hover {
+            background-color: var(--accent-cyan);
+            color: var(--bg-pure-black);
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.3);
+        }
+
+        /* 5. SECTIONS GENERAL */
+        section {
+            padding: 8rem 4rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .bg-shift {
+            background-color: var(--bg-deep-slate);
+        }
+
+        /* 6. DNA CHRONOLOGY TIMELINE */
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+            position: relative;
+        }
+
+        .timeline-card {
+            background: var(--bg-card-dark);
+            border: 1px solid var(--border-subtle);
+            padding: 2.5rem;
+            border-radius: 6px;
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 2rem;
+            transition: border-color 0.3s ease;
+        }
+        .timeline-card:hover {
+            border-color: var(--accent-cyan);
+        }
+
+        .time-epoch {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            font-family: 'Urbanist', sans-serif;
+        }
+
+        .time-details h3 {
+            font-size: 1.35rem;
+            margin-bottom: 0.75rem;
+        }
+
+        /* 7. CASE STUDIES (THE PROOF) */
+        .grid-case-studies {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .case-card {
+            background: linear-gradient(135deg, #0A1120 0%, #040812 100%);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            padding: 3.5rem;
+        }
+
+        .case-header-block {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 1.5rem;
+        }
+
+        .case-meta h3 { font-size: 1.8rem; }
+        .case-meta p { color: var(--accent-cyan); font-weight: 600; font-size: 1rem; text-transform: uppercase; margin-top: 0.25rem;}
+
+        .hero-metric-badge {
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid var(--accent-cyan);
+            color: var(--text-vibrant);
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            font-family: 'Urbanist', sans-serif;
+            font-weight: 700;
+            text-align: right;
+        }
+        .hero-metric-badge span { display: block; font-size: 1.75rem; color: var(--accent-cyan); line-height: 1.1;}
+
+        .case-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .case-block-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .case-body p { margin-bottom: 1rem; color: var(--text-silver); font-weight: 300;}
+
+        /* 8. AUTOMATION EDGE CALLOUT */
+        .ai-callout {
+            background: radial-gradient(circle at 0% 50%, rgba(56, 189, 248, 0.1) 0%, transparent 50%), var(--bg-card-dark);
+            border: 1px solid var(--border-subtle);
+            border-left: 4px solid var(--accent-cyan);
+            padding: 4rem;
+            border-radius: 0 8px 8px 0;
+            margin-top: 2rem;
+        }
+        .ai-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .ai-headline h3 { font-size: 2.5rem; margin-bottom: 1rem; }
+
+        /* 9. TOOLKIT GRID */
+        .toolkit-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+        }
+        .toolkit-box {
+            background: var(--bg-card-dark);
+            border: 1px solid var(--border-subtle);
+            padding: 2.5rem;
+            border-radius: 6px;
+        }
+        .toolkit-box h3 { font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--accent-cyan); }
+        .tag-container { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+        .tag {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-subtle);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: var(--text-silver);
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 6rem 4rem;
+            text-align: center;
+            background: #000;
+        }
+        footer p { color: var(--text-muted); font-size: 0.95rem; margin-top: 1.5rem;}
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 1100px) {
+            .case-body { grid-template-columns: 1fr; gap: 2rem; }
+            .ai-layout { grid-template-columns: 1fr; gap: 2rem; }
+            .toolkit-container { grid-template-columns: 1fr; }
+            .timeline-card { grid-template-columns: 1fr; gap: 0.5rem; }
+        }
+        @media (max-width: 768px) {
+            header { padding: 1.25rem 2rem; }
+            section, .hero { padding: 6rem 2rem; }
+            .hero h1 { font-size: 3rem; }
+            nav { display: none; } /* Mobile simplicity */
+        }
+    </style>
+</head>
+<body class="blueprint-bg">
+
+    <header>
+        <div class="logo">DEV<span>SHAH</span></div>
+        <nav>
+            <a href="#catalyst">The Catalyst</a>
+            <a href="#proof">Execution Proof</a>
+            <a href="#ai-edge">AI Automation</a>
+            <a href="#toolkit">Architecture Toolkit</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="catalyst">
+            <div class="hero-content">
+                <span class="hero-pre">The Accelerator</span>
+                <h1>Unlocking Stagnation.<br>Engineering <span style="color: var(--accent-cyan);">Velocity</span>.</h1>
+                <p>For nearly three decades, I have operated at the absolute bleeding edge of technological evolution. When multi-million-pound initiatives hit an institutional wall, C-suite executives bring me in to shatter inertia and architect seamless Target Operating Models.</p>
+                <a href="https://www.linkedin.com/in/dev-shah-london/" class="btn" target="_blank">
+                    Initiate Velocity <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </section>
+
+        <section class="bg-shift">
+            <h2 class="section-title">Bleeding-Edge <span>DNA</span></h2>
+            <div class="timeline">
+                <div class="timeline-card">
+                    <div class="time-epoch">Early 1990s</div>
+                    <div class="time-details">
+                        <h3>The Dawn of Electronic Systems</h3>
+                        <p>Compiled procedural logic in Pascal at eight years old. Built automated legacy asset data reconciliations at City Petroleum using early spreadsheet macro-logic well before industry standard platforms emerged.</p>
+                    </div>
+                </div>
+                <div class="timeline-card">
+                    <div class="time-epoch">Late 1990s - 2000s</div>
+                    <div class="time-details">
+                        <h3>The Infrastructure Wave</h3>
+                        <p>Sprinted at the front-end of the structural ERP and CRM revolutions. Deployed as a high-intensity processes integrity consultant for global market authorities including Deloitte & Touche, Compaq, and NatWest Bank.</p>
+                    </div>
+                </div>
+                <div class="timeline-card">
+                    <div class="time-epoch">2014 — 2019</div>
+                    <div class="time-details">
+                        <h3>The Venture Battleground (Zucla)</h3>
+                        <p>Backed core operational scalability theories with personal capital. Treated a high-frequency city kitchen exactly like a banking transactional framework—configuring systems where 4 chefs flawlessly served over 10,000 custom meals monthly within a compressed 2-hour daily window. Achieved a £1M+ ARR footprint powered by an oversubscribed equity crowdfunding campaign.</p>
+                    </div>
+                </div>
+                <div class="timeline-card">
+                    <div class="time-epoch">2016 — 2018</div>
+                    <div class="time-details">
+                        <h3>The Blockchain Frontier (Araw UK Ltd)</h3>
+                        <p>Co-founded and steered business architecture parameters for Araw UK. Built an end-to-end decentralized e-commerce reward ecosystem structured natively on the Ethereum blockchain, penetrating global merchant merchant sectors across 40+ countries.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="proof">
+            <h2 class="section-title">Execution <span>Proof</span></h2>
+            <div class="grid-case-studies">
+
+                <div class="case-card">
+                    <div class="case-header-block">
+                        <div class="case-meta">
+                            <h3>Rathbones Group</h3>
+                            <p>Head / Manager of Business Analysis</p>
+                        </div>
+                        <div class="hero-metric-badge">
+                            Scale Multiplier
+                            <span>+400%</span>
+                        </div>
+                    </div>
+                    <div class="case-body">
+                        <div>
+                            <h4 class="case-block-title">The Challenge</h4>
+                            <p>Inherited a fragmented department of 12 siloed professionals operating under inconsistent delivery structures with zero centralized governance frameworks amid high-stakes corporate integration horizons.</p>
+                        </div>
+                        <div>
+                            <h4 class="case-block-title">The Strategy & Execution</h4>
+                            <p>Designed and deployed a comprehensive Business Analysis Target Operating Model (TOM). Installed industry-grade QA testing matrices, standardized Agile/Waterfall house styles, and built a unified Business Process Repository. Successfully led operational integration tracks for the monumental Rathbones/Investec merger.</p>
+                            <p><strong>Result:</strong> Scaled the framework into an elite, corporate Center of Excellence commanding over 50+ integrated specialist BAs.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-header-block">
+                        <div class="case-meta">
+                            <h3>JP Morgan</h3>
+                            <p>Lead CASS Consultant & Remediation Specialist</p>
+                        </div>
+                        <div class="hero-metric-badge">
+                            Latency Reduction
+                            <span>13 Days down to 2</span>
+                        </div>
+                    </div>
+                    <div class="case-body">
+                        <div>
+                            <h4 class="case-block-title">The Challenge</h4>
+                            <p>Retained under severe regulatory scrutiny (FCA S166) to rapidly audit, structure, and remediate systemic compliance data mappings running concurrently across four distinct institutional entities.</p>
+                        </div>
+                        <div>
+                            <h4 class="case-block-title">The Strategy & Execution</h4>
+                            <p>Cross-examined data lineages down to technical parameters across 70+ disparate legacy core banking environments spanning Prime Brokerage, Commodities, and Custody pools.</p>
+                            <p><strong>Result:</strong> Created a permanent CASS Centre of Expertise and automated computing engines that secured a $4 Trillion asset infrastructure, driving verification cycles down from 13 days to an instantly verifiable 2-day loop.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-header-block">
+                        <div class="case-meta">
+                            <h3>HM Land Registry</h3>
+                            <p>Strategic Business Case Architect</p>
+                        </div>
+                        <div class="hero-metric-badge">
+                            Public Allocation Secure
+                            <span>£300M</span>
+                        </div>
+                    </div>
+                    <div class="case-body">
+                        <div>
+                            <h4 class="case-block-title">The Challenge</h4>
+                            <p>Tasked with drafting the definitive national modernization roadmap to completely transition historical public records into modern digital models under intense macroeconomic scrutiny.</p>
+                        </div>
+                        <div>
+                            <h4 class="case-block-title">The Strategy & Execution</h4>
+                            <p>Synthesized vast socio-economic benefit data into the largest public-sector business case outside the NHS. Safely defended tracking parameters against continuous challenges from Trade Unions, Senior Civil Servants, and Whitehall steering panels.</p>
+                            <p><strong>Result:</strong> Secured total sign-off from Government Ministers for the £300,000,000 fund, entirely driving the 100% end-to-end digitization of national registry services.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-header-block">
+                        <div class="case-meta">
+                            <h3>HMRC</h3>
+                            <p>Operational Contingency Design Lead</p>
+                        </div>
+                        <div class="hero-metric-badge">
+                            Tax Directorates Protected
+                            <span>13/13</span>
+                        </div>
+                    </div>
+                    <div class="case-body">
+                        <div>
+                            <h4 class="case-block-title">The Challenge</h4>
+                            <p>Deep within a national program to unify penalty structures, the underlying centralized software system hit an immovable critical delivery delay right before the legally mandated activation date.</p>
+                        </div>
+                        <div>
+                            <h4 class="case-block-title">The Strategy & Execution</h4>
+                            <p>Intervened immediately to design an end-to-end tactical process backup architecture. Engineered data-secure workflow systems leveraging highly advanced Word and Excel calculation arrays that fully cloned the logic of the delayed platform.</p>
+                            <p><strong>Result:</strong> Successfully deployed across the country, keeping 13 distinct tax directorates perfectly operational across the United Kingdom for over 24 months without a single data failure.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="bg-shift" id="ai-edge">
+            <div class="ai-callout">
+                <div class="ai-layout">
+                    <div class="ai-headline">
+                        <span class="hero-pre" style="color: var(--accent-cyan);">The Modern Catalyst</span>
+                        <h3>AI-Turbocharged Execution</h3>
+                        <p>The single greatest operational bottleneck in corporate transformation is documentation latency—the weeks lost to discovery workshops, logic synthesis, and manual requirements drafting.</p>
+                    </div>
+                    <div>
+                        <p>I have completely dissolved that bottleneck. Over the last three years, I have deeply integrated Generative AI multi-agent orchestration frameworks directly into my change management playbook. </p>
+                        <p style="margin-top: 1rem;">By running system logs, business logic, and regulatory mandates through custom-engineered prompt architectures, I compress discovery lifecycles by over 80%. You get the elite oversight of a senior transformation executive executing at machine-velocity speed.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="toolkit">
+            <h2 class="section-title">The Architectural <span>Toolkit</span></h2>
+            <div class="toolkit-container">
+                <div class="toolkit-box">
+                    <h3>Enterprise Infrastructure Systems</h3>
+                    <div class="tag-container">
+                        <span class="tag">InvestCloud</span>
+                        <span class="tag">Avaloq Core Banking</span>
+                        <span class="tag">Charles River (CRIMS)</span>
+                        <span class="tag">Bloomberg (ESMX/BTCA)</span>
+                        <span class="tag">SAP SuccessFactors</span>
+                        <span class="tag">Salesforce CRM</span>
+                        <span class="tag">Iress X-Plan</span>
+                        <span class="tag">LSE UnaVista</span>
+                        <span class="tag">PEGA CaseFlow</span>
+                        <span class="tag">Alteryx</span>
+                        <span class="tag">Snowflake</span>
+                        <span class="tag">PowerBI</span>
+                        <span class="tag">Orbus iServer365</span>
+                    </div>
+                </div>
+                <div class="toolkit-box">
+                    <h3>Strategic Methodologies</h3>
+                    <div class="tag-container">
+                        <span class="tag">HOBA Business Architecture</span>
+                        <span class="tag">Target Operating Model (TOM) Design</span>
+                        <span class="tag">Agile Product Ownership (JIRA / Kanban)</span>
+                        <span class="tag">Business Benefits Realization (MSP)</span>
+                        <span class="tag">Process Mining & Engineering (Lean)</span>
+                        <span class="tag">Regulatory Architecture (CASS / MiFID II)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Let's Accelerate.</h2>
+        <a href="https://www.linkedin.com/in/dev-shah-london/" class="btn" target="_blank">
+            Connect via LinkedIn <i class="fa-brands fa-linkedin"></i>
+        </a>
+        <p>&copy; 2026 Dev Shah. All rights reserved. Built with absolute execution velocity.</p>
+    </footer>
+
+</body>
+</html>
